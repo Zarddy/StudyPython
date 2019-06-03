@@ -34,8 +34,8 @@ def get_final_domain(url):
 
 
 # 获取所有分组数据
-def list_all_category(html):
-    soup = BeautifulSoup(html.text, 'html.parser')
+def list_all_category(html_doc):
+    soup = BeautifulSoup(html_doc, 'html.parser')
     all_row_item = soup.find_all("div", class_="row-item")
 
     for row_item in all_row_item:
