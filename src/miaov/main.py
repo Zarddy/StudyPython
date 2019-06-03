@@ -18,7 +18,8 @@ def get_final_domain(url):
     if _response.status_code == 200:
         _new_url = str(_response.url)
 
-        print('new_url:', _new_url)
+        if not '/'.__eq__(_new_url[-1]):
+            _new_url += '/'
 
         if _new_url.__eq__(url):
             return url
@@ -27,10 +28,24 @@ def get_final_domain(url):
             return get_final_domain(_new_url)
 
     else:
-        return 'nothing'
+        return None
 
 
 if __name__ == '__main__':
 
     domain = get_final_domain(domain)
-    print('final domain is ', domain)
+
+    if not domain:
+        print('域名获取失败！')
+
+    else:
+        print('final domain is ', domain)
+
+        domain += 'index/home.html'
+
+        response = requests.get(url=domain, params=params, headers=headers)
+        response.encoding = 'UTF-8'
+
+        if response.status_code == 200:
+            print( response.text )
+
