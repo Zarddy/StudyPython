@@ -7,8 +7,6 @@ from miaov.parser import OnlineVideoParser
 
 if __name__ == '__main__':
 
-    # OnlineVideoParser.list_download_video_articles('https://www.69aef.com', '亚洲电影', '/xiazai/list-')
-
     domain = HttpHelper.get_domain()
 
     if not domain:
@@ -18,12 +16,13 @@ if __name__ == '__main__':
         print('final domain is ', domain)
 
         # 获取首页所有分组数据
-        # CategoryParser.list_all_home_page_category(domain)
+        CategoryParser.list_all_home_page_category(domain)
 
         # 获取在线视频所有分组数据
-        # OnlineVideoParser.list_online_video_category(domain)
+        OnlineVideoParser.list_online_video_category(domain)
 
-        # OnlineVideoParser.list_download_video_articles(domain)
+        # 获取 "视频下载"分类下的文章列表
+        OnlineVideoParser.list_download_video_articles(domain)
 
 
 # 分组分类：
