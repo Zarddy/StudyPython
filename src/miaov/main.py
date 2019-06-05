@@ -3,6 +3,7 @@
 
 from miaov.common import HttpHelper
 from miaov.parser import CategoryParser
+from miaov.parser import DownloadVideoParser
 from miaov.parser import OnlineVideoParser
 
 if __name__ == '__main__':
@@ -22,7 +23,7 @@ if __name__ == '__main__':
         OnlineVideoParser.list_online_video_category(domain)
 
         # 获取 "视频下载"分类下的文章列表
-        OnlineVideoParser.list_download_video_articles(domain)
+        DownloadVideoParser.list_download_video_articles(domain)
 
 
 # 分组分类：
