@@ -2,23 +2,31 @@
 import requests
 from bs4 import BeautifulSoup
 
-domain = 'https://www.avav32.com'
-headers = {
+BASE_DOMAIN = 'https://www.avav32.com'
+BASE_HEADERS = { # 请求头部
     'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Mobile Safari/537.36'
-}  # 请求头部
-payload = {}  # body中的请求参数
-params = {}  # 添加到url的参数
-allow_redirects = True  # 是否允许重定向
+}
+BASE_PAYLOAD = {}  # body中的请求参数
+BASE_PARAMS = {}  # 添加到url的参数
 
 
-# 获取经过跳转后的最终域名
 def get_domain():
-    return get_final_domain(domain)
+    """
+    获取经过跳转后的最终域名
+    :return: 最终域名
+    """
+
+    return get_final_domain(BASE_DOMAIN)
 
 
 def get_final_domain(url):
-    _response = http_get(url=url)
+    """
+    获取经过跳转后的最终域名
+    :param url: 初始域名
+    :return: 最终域名
+    """
 
+    _response = http_get(url=url)
     if _response.status_code == 200:
         _new_url = str(_response.url)
 
@@ -35,7 +43,13 @@ def get_final_domain(url):
 
 
 def http_get(url):
-    response = requests.get(url=url, params=params, headers=headers)
+    """
+    获取页面内容
+    :param url: 目标路径
+    :return: 页面内容
+    """
+
+    response = requests.get(url=url, params=BASE_PARAMS, headers=BASE_HEADERS)
     response.encoding = 'UTF-8'
     return response
 
@@ -46,8 +60,8 @@ def get_beautiful_soup(url):
     :param url: 指定的页面路径
     :return: BeautifulSoap 对象
     """
-    response = http_get(url)
 
+    response = http_get(url)
     if response.status_code == 200:
 
         soup = BeautifulSoup(response.text, 'html.parser')
